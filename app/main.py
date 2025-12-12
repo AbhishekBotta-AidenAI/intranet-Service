@@ -19,10 +19,6 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    # Permit all origins to avoid CORS blocking during development and
-    # when the frontend is served from various hosts. If you want to
-    # restrict origins in production, replace `\"*\"` with a list
-    # of allowed origins in `ALLOWED_ORIGINS` environment variable.
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
