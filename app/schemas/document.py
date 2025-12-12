@@ -24,7 +24,7 @@ class DocumentResponse(DocumentBase):
     updated_at: datetime
 
     class Config:
-        from_attributes = True
+        orm_mode = True
 
 class DocumentListResponse(BaseModel):
     total: int

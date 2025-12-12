@@ -45,11 +45,12 @@ def get_documents(
     
     total = query.count()
     documents = query.offset(skip).limit(limit).all()
-    
-    return {
-        "total": total,
-        "documents": documents
-    }
+
+    # Convert ORM objects to Pydantic models to satisfy response_model validation
+    from app.schemas.document import DocumentListResponse, DocumentResponse
+
+    docs_out = [DocumentResponse.from_orm(d) for d in documents]
+    return DocumentListResponse(total=total, documents=docs_out)
 
 @router.get("/{document_id}", response_model=DocumentResponse)
 def get_document(
